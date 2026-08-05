@@ -6,8 +6,6 @@ What makes a project an auto-formalization project here is the comparator pair. 
 
 A project with no machine in the loop—one where a person states a result and proves it in place—wants the sibling template https://github.com/0stellensatz/LeanTemplate instead, which is this one with the comparator machinery removed.
 
-Both are the seed for the Lean projects of a private notes repository, where each project derived from either is cloned back in as a git submodule. Nothing here is specific to that repository except a handful of paths in the conventions, noted at the end.
-
 ## Deriving a project from it
 
 Everything down to the divider is about the template. `__rename__.py` cuts it in step 2, leaving the project's own README behind.
@@ -49,17 +47,13 @@ Everything down to the divider is about the template. `__rename__.py` cuts it in
 - **`__check__.py`**—the structural checker, and the half of the comparator discipline that is mechanical. It is textual and needs no build, and it catches the mistakes a build does not report as errors: a file missing from the root module, a comparator file that imports more than Mathlib, a module that reaches two of a unit's three comparator files, and a comparator file that has drifted from its Challenge. That third one is the reason it exists at all—two `theorem`s of syntactically identical type merge on import without a diagnostic, so a `sorry`ed Challenge target can supersede a proved Development one and nothing in the build says so.
 - **`__docs__/`**—four convention documents, all four in force for a project derived from here:
 	- `rules-comparator.md`—the Challenge / Development pair: what the three files are, why a comparator file imports only Mathlib, how a Development body bridges from its cloned definitions to the production API, and what the checker verifies. This is the document the template exists for.
-	- `rules-formalization-project.md`—the `Defs.lean` / auxiliary-file architecture the comparator sits on top of, unit by unit, with the skeleton / fill / discharge workflow.
+	- `rules-formalization-project.md`—the per-unit architecture the comparator sits on top of, with the skeleton / fill / discharge workflow. Beyond the comparator trio sharing a directory it fixes no directory scheme and no filenames, naming `Defs.lean` only as a convention.
 	- `rules-comments.md`—how the prose inside a comment is written. Its closing *When the target is Mathlib* section is the conditional part: a project not aimed at upstreaming cuts it and says so in one line at the top, so the copy states only rules that are in force.
 	- `rules-documentation.md`—module and declaration docstrings, and citations. The citation section is worth narrowing per project.
 - **`.github/workflows/build.yml`**—fetches the Mathlib cache, builds, builds any comparator files by name, and runs `__check__.py`. The three workflows `lake new` ships are deliberately not here: two of them publish releases and documentation, and the third opens automatic Mathlib-bump pull requests, which would break a tree that pins one Mathlib revision across every project.
 - **`LICENSE`**—Apache-2.0, matching the Lean and Mathlib ecosystem. Replace it, or delete it, if the derived project wants something else.
 
 Once derived, these are the project's own. They are fine-tuned in place as the project's reality demands, and an exception belongs in the project's copy, never back in the template. An edit to the template changes what the *next* project starts from; it does not reach the projects already derived, and propagating it into them is a deliberate, project-by-project act—a copy that has been fine-tuned is never overwritten wholesale.
-
-## Paths that point outside
-
-The conventions were written inside a private notes repository and refer to a few of its paths: `bib/__main__.bib` (the bibliography that docstring cite keys resolve against), `notes/math/theme/` (the reading notes behind a formalization), and `notes/code-lean4/` (where the derived projects are checked out). They do not resolve in a standalone clone. They are left in place because they record where a convention or a statement comes from, which is worth more than a path that resolves; a project used outside that repository repoints them in its own copies.
 
 ---
 

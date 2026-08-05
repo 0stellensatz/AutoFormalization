@@ -6,15 +6,15 @@ This file provides guidance to coding agents—Claude Code (claude.ai/code) and 
 
 ## Project
 
-*What the project formalizes.* If it is bound to a source, name the work and its cite key in `bib/__main__.bib` (repo-root-relative); if it is bound to a theorem rather than to a paper, state the theorem and say that the exposition is not being followed step by step. Name the source of truth for statements—a reading note under `notes/math/theme/`, the cached PDF, or both—and the form a page or theorem citation takes.
+*What the project formalizes.* If it is bound to a source, name the work and its cite key, and **name the bibliography that key lives in**—`@./__docs__/rules-documentation.md` cites against whatever this section says, and says so nowhere else. If the project is bound to a theorem rather than to a paper, state the theorem and say that the exposition is not being followed step by step. Name the source of truth for statements—the paper, a reading note taken from it, or both—and the form a page or theorem citation takes.
 
 ## Architecture
 
-This is a standalone Lake package, and an auto-formalization project: it follows `@./__docs__/rules-formalization-project.md` for the `Defs.lean` / auxiliary-file architecture and `@./__docs__/rules-comparator.md` for the Challenge / Development pair on top of it. *State here the project-specific parameters those documents leave open:*
+This is a standalone Lake package, and an auto-formalization project: it follows `@./__docs__/rules-formalization-project.md` for the per-unit architecture and `@./__docs__/rules-comparator.md` for the Challenge / Development pair on top of it. *State here the project-specific parameters those documents leave open:*
 
-- **The unit granularity**: whether a unit is the project root itself, a chapter directory `CNN/`, or a section directory `SNN/`—and so what the module names and the build target look like.
+- **The unit granularity**: what slice of the source a unit is, and what its directory is called—the comparator trio shares one directory, but nothing fixes its name—and so what the module names and the build targets look like.
 - **The root namespace**, and the comparator namespace beside it. Whether the project declares one flat namespace or a sub-namespace per file.
-- **Where the definitional layer lives**: `Defs.lean` is the *production* copy, imported by the auxiliary files and by `Development.lean`, never by `Challenge.lean`. Say how expensive bridging from a clone is here—cheap when the layer is all `def`s, less so when it holds a `structure`.
+- **Where the production definitions live**: which file holds them, if any file does. They are what the proof files and `Development.lean` import, and never what `Challenge.lean` imports. Say how expensive bridging from a clone is here—cheap when the layer is all `def`s, less so when it holds a `structure`.
 - **Whether the project keeps a `CompareMathlib.lean`**, and if not, why there is no contrast to draw.
 - **Whether Mathlib may be used without restriction**, or whether the project draws a preliminary boundary that later units must respect.
 - **Any standing exemption**—an unused-variable warning kept on purpose, an unscoped `maxHeartbeats`—with the reasoning recorded in the `__docs__/` copy that governs it, not here.

@@ -32,8 +32,8 @@ Four checks, all textual (no build, no Lean required):
 3.  Comparator self-containment --- `Challenge.lean` and `CompareMathlib.lean`
     may import nothing but `Mathlib`.  A Challenge is the project's benchmark,
     so it has to stand on its own against Mathlib: the definitions its targets
-    are stated over are cloned into it rather than imported from `Defs.lean`,
-    and nothing that proves a target can come into reach.
+    are stated over are cloned into it rather than imported from the production
+    side, and nothing that proves a target can come into reach.
 
 4.  Comparator --- inside one unit directory, `Challenge.lean`,
     `Development.lean` and `CompareMathlib.lean` must expose the same
@@ -291,9 +291,9 @@ def check_comparator_isolation(
 ) -> None:
     """No module may reach two comparator files of one unit.
 
-    Reachability, not the direct import, is what decides: a module that imports
-    `Defs.lean` holds whatever `Defs.lean` imported in turn, and the merge is
-    just as silent.  A violation is reported against the module where it first
+    Reachability, not the direct import, is what decides: a module holds
+    whatever the modules it imports imported in turn, and the merge is just as
+    silent.  A violation is reported against the module where it first
     appears --- the one whose own import list brings the second file into reach
     --- rather than against every module downstream of it.  `reported_at_root`
     carries what the root-import check has already said, so a root module that
@@ -343,7 +343,8 @@ def check_comparator_imports(errors: list[str]) -> None:
 
     The Challenge is what the project offers as its benchmark, so it must be
     readable and trustable against Mathlib alone --- hence the clones of the
-    definitional layer inside it, in place of an import of `Defs.lean`.  The
+    definitional layer inside it, in place of an import of the production
+    definitions.  The
     rule is stated over the *text* of the import line, so it catches a
     project-local import whether or not the module it names exists yet.
     """
