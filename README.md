@@ -69,8 +69,15 @@ Mathlib is pinned in `lake-manifest.json`, and `elan` will fetch the toolchain n
 
 ```bash
 lake exe cache get   # once, before the first build—otherwise Mathlib compiles from source
-lake build           # the whole project, by way of the root all-import module
+lake build           # everything the root all-import module reaches
 python3 __check__.py
+```
+
+`Challenge.lean` and `CompareMathlib.lean` are **not** among them: they share `Development.lean`'s namespace, so the root module cannot import them and `lake build` does not compile them. Build each by name, or a specification file that fails to elaborate stays green:
+
+```bash
+lake build <Project>.<Unit>.Challenge
+lake build <Project>.<Unit>.CompareMathlib
 ```
 
 The conventions this project follows are its own copies, in `__docs__/`.

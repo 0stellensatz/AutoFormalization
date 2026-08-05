@@ -37,7 +37,7 @@ Three files are named by the comparator discipline. The rest is production code,
 Beside them:
 
 - **The production definitions** the unit's targets are stated over: structures, instances, notation, and `rfl`-level unfolding lemmas. Give them a file of their own—`Defs.lean` is the conventional name, and nothing enforces it—as soon as more than one file states lemmas over them, so that each of those files can import the definitions rather than one of them owning the definitions and the rest having to import it whole. A unit whose targets are stated in Mathlib's vocabulary alone wants no such file, and clones nothing into its comparator files either.
-- **The proof files** — one per goal, or per tight cluster of goals, named in UpperCamelCase after the result proved, with the source tag recorded in the module docstring. This is where the actual multi-line proofs live, and what `Development.lean` delegates to.
+- **The proof files.** One per goal, or per tight cluster of goals, named in UpperCamelCase after the result proved, with the source tag recorded in the module docstring. This is where the actual multi-line proofs live, and what `Development.lean` delegates to.
 
 However the production side is split, the comparator files clone the definitions their targets need rather than importing them, so the production copy and the clones are maintained in step by hand (`./rules-comparator.md`).
 
@@ -70,7 +70,7 @@ If step 3 cannot be carried out without changing the statement, the statement wa
 - Production declarations live in the project's root namespace; source-level objects get nested namespaces for dot notation. The comparator files share a namespace of their own (`./rules-comparator.md`).
 - The comparator files own the public, source-facing names, in descriptive Mathlib style. Each proof file wraps its contents in a sub-namespace named after the file (`namespace <Root>.RhoEP` inside `RhoEP.lean`), so its concluding lemma can restate the target without a name clash; helpers not meant for use outside the file are `private`.
 - Docstrings on source-facing declarations cite the source's numbering and page—see `./rules-documentation.md`.
-- Modeling decisions (how a source object is encoded—e.g. `ℤ_{≥1}` as `ℕ+`) are recorded once, in the `## Implementation notes` of the `Challenge.lean` that introduces them, and stay consistent across units.
+- Modeling decisions (how a source object is encoded—e.g., `ℤ_{≥1}` as `ℕ+`) are recorded once, in the `## Implementation notes` of the `Challenge.lean` that introduces them, and stay consistent across units.
 - When a declaration's natural name collides with the Mathlib lemma it mirrors, the Mathlib one is reachable as `_root_.<name>`; prefer a distinct descriptive name when the collision would confuse.
 
 ## File layout

@@ -27,11 +27,13 @@ Every source file must be reachable from the root all-import module `AutoFormali
 
 The one edit almost every project makes: `rules-comments.md` closes with a *When the target is Mathlib* section, which a project not aimed at upstreaming cuts, noting the cut in one line at the top of its copy.
 
-These copies are this project's own and are fine-tuned here, not in the template. Run the checker before declaring work done, and a build after it:
+These copies are this project's own and are fine-tuned here, not in the template. Run the checker before declaring work done, and a build after it—including the two files `lake build` leaves out, since they are the specification and a failure to elaborate in one is otherwise invisible:
 
 ```bash
 python3 __check__.py
 lake build
+lake build <Project>.<Unit>.Challenge
+lake build <Project>.<Unit>.CompareMathlib
 ```
 
 ## Editing conventions for the comments
