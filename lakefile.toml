@@ -1,10 +1,10 @@
-name = "LeanTemplate"
+name = "AutoFormalization"
 version = "0.1.0"
 description = "" # one line: what this project formalizes
 keywords = ["math"]
-homepage = "https://github.com/0stellensatz/LeanTemplate"
+homepage = "https://github.com/0stellensatz/AutoFormalization"
 license = "Apache-2.0"
-defaultTargets = ["LeanTemplate"]
+defaultTargets = ["AutoFormalization"]
 
 [leanOptions]
 pp.unicode.fun = true # pretty-prints `fun a ↦ b`
@@ -23,4 +23,4 @@ git = "https://codeberg.org/wvhulle/lean-prism.git"
 rev = "main"
 
 [[lean_lib]]
-name = "LeanTemplate"
+name = "AutoFormalization"

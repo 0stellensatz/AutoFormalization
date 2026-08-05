@@ -2,14 +2,14 @@
 """Rename this template checkout to the project it is becoming.
 
 A GitHub template repository copies files verbatim---it substitutes nothing---so
-a repository generated from `LeanTemplate` still calls its Lake package, its
-library directory, and its root all-import module `LeanTemplate`.  Run this once,
+a repository generated from `AutoFormalization` still calls its Lake package, its
+library directory, and its root all-import module `AutoFormalization`.  Run this once,
 from the repository root, before writing any Lean:
 
     python3 __rename__.py <Project>
 
 It renames the two paths that carry the name, rewrites every textual occurrence
-of `LeanTemplate` in the tracked files, cuts the template half of `README.md` at
+of `AutoFormalization` in the tracked files, cuts the template half of `README.md` at
 its `TEMPLATE-README-ENDS-HERE` sentinel, and then deletes itself---a template's
 rename step is not part of the project it produced.  Nothing else is touched: the
 `__docs__/` rule copies, `__check__.py`, and the Lake files stay as they are, and
@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-OLD = "LeanTemplate"
+OLD = "AutoFormalization"
 
 # Everything under these is either git's own storage or a machine-local build
 # artifact; neither is ours to rewrite.
