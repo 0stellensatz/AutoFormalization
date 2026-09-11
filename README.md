@@ -82,3 +82,7 @@ lake build <Project>.<Unit>.CompareMathlib
 ```
 
 The conventions this project follows are its own copies, in `__docs__/`.
+
+## Codex setup
+
+See [the Codex integration guide](.codex/README.md) for Lean MCP, completion-hook activation, and configuration regeneration.
